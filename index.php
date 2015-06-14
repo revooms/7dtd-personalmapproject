@@ -1,5 +1,5 @@
 <?php 
-$version = "0.1";
+$version = "0.2";
 $laststarted = file_get_contents('laststarted'); // datetime
 $lastgenerated = file_get_contents('lastgenerated'); // datetime
 
@@ -30,8 +30,8 @@ $title = sprintf("7dtd map v%g - Generated: %s -  %s", $version, $laststarted, $
 <div id="map"></div>
 
 <script src="js/leaflet.js"></script>
-<script src='js/leaflet-omnivore.min.js'></script>
-<script src='js/L.Control.MousePosition.js'></script>
+<script src="js/leaflet-omnivore.min.js"></script>
+<script src="js/L.Control.MousePosition.js"></script>
 //*****************************************************k13
 <script src="js/XmlToGeoJSON.js"></script>
 //*****************************************************/k13
@@ -58,15 +58,16 @@ myCRS = L.extend({}, L.CRS.Simple, {
 	}
 });
     var map = L.map('map', {
-    zoomControl: true,
-    attributionControl: false,
-    crs: myCRS
+	    zoomControl: true,
+	    attributionControl: true,
+	    crs: myCRS
 }).setView([0, 0], native_zoom_level / 2);
     var layers = document.getElementById('menu-ui');
     var players = []
 
     L.tileLayer('tiles/{z}/{x}/{y}.png', {maxNativeZoom : native_zoom_level, continuousWorld: 'false', attribution: '©The Fun Pimps'}).addTo(map);
 
+<?php /* ?>
     var sel = document.createElement("select");
     var options = {
         filter: function(cols) {
@@ -86,6 +87,7 @@ myCRS = L.extend({}, L.CRS.Simple, {
     };
     var myLayer = omnivore.csv('players/tracks.csv', options);
     addLayer(myLayer, 'Player path', 1, true);
+
     sel.onchange = function() {
         // If the user change player recreate the layer
         map.removeLayer(myLayer);
@@ -106,6 +108,8 @@ myCRS = L.extend({}, L.CRS.Simple, {
         }
     });
     map.addControl(new MyControl());
+<?php */ ?>
+
 
     // Add mouse position
     L.control.mousePosition({
@@ -164,16 +168,16 @@ myCRS = L.extend({}, L.CRS.Simple, {
 
     addLayer(canvasTiles, 'Region tiles', 2, false);
 
-	//***********************************************************************************************************************k13
-	var AllPOI = L.geoJson(ShowPOILocation(), {
-	pointToLayer: function (feature, latlng) {				
-		if (feature.properties && feature.properties.popupContent) {
-			return L.marker(latlng, {icon: feature.properties.icon});	
-		}		
-		return false;
-	},
-	style: LineStyle,
-	onEachFeature: onEachFeature
+//***********************************************************************************************************************k13
+var AllPOI = L.geoJson(ShowPOILocation(), {
+pointToLayer: function (feature, latlng) {
+	if (feature.properties && feature.properties.popupContent) {
+		return L.marker(latlng, {icon: feature.properties.icon});
+	}
+	return false;
+},
+style: LineStyle,
+onEachFeature: onEachFeature
 });
 
 addLayer(AllPOI, 'All Signaled POI', 3, true);//kersma.addTo(map);
@@ -182,7 +186,7 @@ function onEachFeature(feature, layer) {
 	if (feature.properties && feature.properties.popupContent) {
 		var popupContent = popupcontent(feature.properties.entity, feature.properties.popupContent);
 		layer.bindPopup(popupContent);
-	}   
+	}
 }
 
 function popupcontent(entityId, content) {

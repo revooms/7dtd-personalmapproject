@@ -9,4 +9,5 @@
 -->
 <poi sname="kerbholz" steamId="12345678901234567" pname="HQ" pos="529, 0, -858" icon="markericon" />
 <poi sname="kerbholz" steamId="12345678901234567" pname="HQ City" pos="-35, 0, -135" icon="markericon" />
+<poi sname="kerbholz" steamId="12345678901234567" pname="Second HQ" pos="1835, 0, 320" icon="markericon" />
 </poilist>
