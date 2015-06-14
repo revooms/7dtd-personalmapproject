@@ -168,33 +168,34 @@ myCRS = L.extend({}, L.CRS.Simple, {
 
     addLayer(canvasTiles, 'Region tiles', 2, false);
 
-//***********************************************************************************************************************k13
-var AllPOI = L.geoJson(ShowPOILocation(), {
-pointToLayer: function (feature, latlng) {
-	if (feature.properties && feature.properties.popupContent) {
-		return L.marker(latlng, {icon: feature.properties.icon});
-	}
+	/***********************************************************************************************************************k13 */
+	var AllPOI = L.geoJson(ShowPOILocation(), {
+	pointToLayer: function (feature, latlng) {
+		if (feature.properties && feature.properties.popupContent) {
+			return L.marker(latlng, {icon: feature.properties.icon});
+		}
 	return false;
-},
-style: LineStyle,
-onEachFeature: onEachFeature
-});
+	},
+	style: LineStyle,
+	onEachFeature: onEachFeature
+	});
 
-addLayer(AllPOI, 'All Signaled POI', 3, true);//kersma.addTo(map);
+	addLayer(AllPOI, 'All Signaled POI', 3, true); //kersma.addTo(map);
 
-function onEachFeature(feature, layer) {
-	if (feature.properties && feature.properties.popupContent) {
-		var popupContent = popupcontent(feature.properties.entity, feature.properties.popupContent);
-		layer.bindPopup(popupContent);
+	function onEachFeature(feature, layer) {
+		if (feature.properties && feature.properties.popupContent) {
+			var popupContent = popupcontent(feature.properties.entity, feature.properties.popupContent);
+			layer.bindPopup(popupContent);
+		}
 	}
-}
 
-function popupcontent(entityId, content) {
-	var popupContent = '<img src="./images/thumbs/entity-'+ entityId + '.jpg" alt="entity" /><div class="popup__content">';
-	popupContent += content + '</div>';
-	return popupContent;
-}
-//*************************************************************************************************************************/k13
+	function popupcontent(entityId, content) {
+		// var popupContent = '<img src="./images/thumbs/entity-'+ entityId + '.jpg" alt="entity" />';
+		var popupContent = '<div class="popup__content">';
+		popupContent += content + '</div>';
+		return popupContent;
+	}
+	/*************************************************************************************************************************k13 */
 
     function addLayer(layer, name, zIndex, active) {
         if(active) {

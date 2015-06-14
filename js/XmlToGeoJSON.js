@@ -45,7 +45,7 @@ function ShowPOILocation() {
 					var sname =  pois[j].getAttribute("sname");
 					var icone =  pois[j].getAttribute("icon");
 					var name = pois[j].getAttribute("name");
-						var ct = escapeHTML(pname) + "<br>Signaled by " + escapeHTML(sname);
+						var ct = "<b>" + escapeHTML(pname) + "</b> - " + escapeHTML(sname);
 						var prop0 = {
 							"icon": window[icone],
 							"popupContent": ct,
