@@ -1,10 +1,9 @@
 .idea
+*.py
 *.pyc
 *.pyd
 *.spec
 dist/
 build/
 *.exe
-laststarted
-lastgenerated
 tiles/tile_history.db
